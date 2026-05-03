@@ -1,15 +1,18 @@
+import express from "express";
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Backend werkt");
+});
+
 app.get("/positions", async (req, res) => {
-  try {
-    const response = await axios.get("https://api.bybit.com/v5/position/list");
+  res.json({
+    status: "ok",
+    message: "Positions route werkt"
+  });
+});
 
-    console.log("BYBIT RESPONSE:");
-    console.log(response.data);
-
-    res.json(response.data);
-  } catch (err) {
-    console.log("ERROR:");
-    console.log(err.response?.data || err.message);
-
-    res.json({ error: err.response?.data || err.message });
-  }
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Server draait");
 });
