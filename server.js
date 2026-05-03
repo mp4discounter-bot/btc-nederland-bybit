@@ -34,8 +34,17 @@ app.get("/positions", async (req, res) => {
       }
     });
 
-    const data = await response.json();
-    res.json(data);
+    const text = await response.text();
+
+try {
+  const data = JSON.parse(text);
+  res.json(data);
+} catch (e) {
+  res.json({
+    error: "Bybit response is geen geldige JSON",
+    raw: text
+  });
+}
 
   } catch (err) {
     res.json({ error: err.message });
