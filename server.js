@@ -23,7 +23,7 @@ app.get("/positions", async (req, res) => {
       .update(payload)
       .digest("hex");
 
-    const url = "https://api.bybit.com/v5/position/list?" + query;
+   const url = "https://api.bybit.com/v5/market/tickers?category=linear";
 
     const response = await fetch(url, {
       headers: {
